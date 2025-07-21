@@ -1,13 +1,13 @@
 // ==UserScript==
-// @name        X Bookmarks Exporter (Progressive Scraping)
-// @name:ja     X (Twitter) ブックマークエクスポーター
-// @namespace   http://tampermonkey.net/
-// @version     3.0
-// @description Automatically scrolls to the bottom, progressively collecting bookmarks, and then exports them all as a CSV file.
+// @name         X Bookmarks Exporter (Progressive Scraping)
+// @name:ja      X (Twitter) ブックマークエクスポーター
+// @namespace    http://tampermonkey.net/
+// @version      3.1
+// @description  Automatically scrolls to the bottom, progressively collecting bookmarks, and then exports them all as a CSV file.
 // @description:ja 自動で最下部までスクロールしながら逐次ブックマークを収集し、すべてをCSVファイルとしてエクスポートします。
-// @author      Mekann
-// @match       https://x.com/i/bookmarks
-// @grant       GM_addStyle
+// @author       Mekann
+// @match        https://x.com/i/bookmarks
+// @grant        GM_addStyle
 // ==/UserScript==
 
 (function() {
@@ -33,7 +33,7 @@
     document.body.appendChild(exportButton);
     exportButton.addEventListener('click', autoScrollAndExport);
 
-    // --- メイン処理 ---
+    // --- メイン処理 (修正版) ---
     function autoScrollAndExport() {
         // 重複を避けるため、ツイートURLをキーにしたMapを使用
         const collectedTweets = new Map();
@@ -44,38 +44,42 @@
         exportButton.disabled = true;
 
         const scrollInterval = setInterval(() => {
-            // 現在画面にあるツイートを収集
-            const countBefore = collectedTweets.size;
-            scrapeVisibleTweets(collectedTweets);
-            const countAfter = collectedTweets.size;
-
-            exportButton.innerText = `収集中... (${countAfter}件)`;
-
-            // スクロール実行
+            // --- 修正点：先にスクロールする ---
             window.scrollTo(0, document.body.scrollHeight);
-            const newHeight = document.body.scrollHeight;
 
-            // スクロールが停止したかチェック
-            if (newHeight === lastHeight) {
-                consecutiveStops++;
-            } else {
-                consecutiveStops = 0; // 高さが変わったらリセット
-            }
-            lastHeight = newHeight;
-
-            // 複数回連続で停止したら、スクロール完了とみなす
-            if (consecutiveStops >= maxConsecutiveStops) {
-                clearInterval(scrollInterval);
-                console.log(`Scrolling complete. Total ${collectedTweets.size} unique bookmarks collected.`);
-                exportButton.innerText = `エクスポート中... (${collectedTweets.size}件)`;
-                // 念のため最後にもう一度収集
+            // スクロール後に新しいツイートが読み込まれるのを待つ
+            setTimeout(() => {
+                // 現在画面にあるツイートを収集
                 scrapeVisibleTweets(collectedTweets);
-                setTimeout(() => {
-                    exportToCSV(collectedTweets);
-                    resetButton(collectedTweets.size);
-                }, 1000);
-            }
-        }, 2000); // 2秒ごとにスクロールと収集を実行
+                exportButton.innerText = `収集中... (${collectedTweets.size}件)`;
+
+                const newHeight = document.body.scrollHeight;
+
+                // スクロールが停止したかチェック
+                if (newHeight === lastHeight) {
+                    consecutiveStops++;
+                } else {
+                    consecutiveStops = 0; // 高さが変わったらリセット
+                }
+                lastHeight = newHeight;
+
+                // 複数回連続で停止したら、スクロール完了とみなす
+                if (consecutiveStops >= maxConsecutiveStops) {
+                    clearInterval(scrollInterval);
+                    console.log(`Scrolling complete. Total ${collectedTweets.size} unique bookmarks collected.`);
+
+                    // 念のため最後にもう一度収集
+                    scrapeVisibleTweets(collectedTweets);
+                    exportButton.innerText = `エクスポート中... (${collectedTweets.size}件)`;
+
+                    setTimeout(() => {
+                        exportToCSV(collectedTweets);
+                        resetButton(collectedTweets.size);
+                    }, 1000);
+                }
+            }, 1500); // 1.5秒待ってから収集・判定する
+
+        }, 2000); // 2秒ごとにスクロールを試みる
     }
 
     /**
