@@ -43,7 +43,7 @@
         exportButton.disabled = true;
 
         const scrollInterval = setInterval(() => {
-            // ✨改善点: 画面の高さの90%ずつスクロールして、収集範囲を重ねる
+            // 改善点: 画面の高さの90%ずつスクロールして、収集範囲を重ねる
             window.scrollBy(0, window.innerHeight * 0.9);
 
             // スクロール後に新しいツイートが読み込まれるのを待つ
