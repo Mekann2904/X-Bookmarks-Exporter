@@ -18,9 +18,9 @@ This is a UserScript to export all your X (formerly Twitter) bookmarks to a sing
 
 1.  **UserScriptマネージャーの導入**
     ブラウザにUserScriptを導入するための拡張機能をインストールします。
-    * [Tampermonkey](https://www.tampermonkey.net/): Chrome, Firefox, Edge, Safariなど主要なブラウザに対応しています。
-    * [Violentmonkey](https://violentmonkey.github.io/): Chrome, Firefox, Edgeなどに対応するオープンソースのUserScriptマネージャーです。(推奨)
-    * [Greasemonkey](https://addons.mozilla.org/ja/firefox/addon/greasemonkey/): Firefox専用のUserScriptマネージャーです。
+        * [Violentmonkey](https://violentmonkey.github.io/): Chrome, Firefox, Edgeなどに対応するオープンソースのUserScriptマネージャーです。(推奨)
+    * [Tampermonkey](https://www.tampermonkey.net/): Chrome, Firefox, Edge, Safariなど主要なブラウザに対応しています。(未検証)
+    * [Greasemonkey](https://addons.mozilla.org/ja/firefox/addon/greasemonkey/): Firefox専用のUserScriptマネージャーです。(未検証)
 
 2.  **スクリプトのインストール**
     お使いのUserScriptマネージャーのダッシュボードで「新規スクリプトを追加」を選択し、提供されたスクリプトのコードをすべてコピーして貼り付け、保存してください。

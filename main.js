@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         X Bookmarks Exporter (Progressive & Overlapping Scraping)
 // @name:ja      X (Twitter) ブックマークエクスポーター
-// @namespace    http://tampermonkey.net/
+// @namespace    https://github.com/Mekann2904/X-Bookmarks-Exporter
 // @version      3.2
 // @description  Scrolls down step-by-step, ensuring overlapping scrapes to prevent missing bookmarks, and exports them as a CSV file.
 // @description:ja 少しずつスクロールし、収集範囲を重ねることでブックマークの取りこぼしを防ぎ、すべてをCSVファイルとしてエクスポートします。
