@@ -1,5 +1,3 @@
-# X-Bookmarks-Exporter
-
 # X (Twitter) ブックマークエクスポーター
 
 X (旧Twitter) のブックマークを、すべてCSVファイルとしてエクスポートするためのUserScriptです。
@@ -21,7 +19,7 @@ This is a UserScript to export all your X (formerly Twitter) bookmarks to a sing
 1.  **UserScriptマネージャーの導入**
     ブラウザにUserScriptを導入するための拡張機能をインストールします。
     * [Tampermonkey](https://www.tampermonkey.net/): Chrome, Firefox, Edge, Safariなど主要なブラウザに対応しています。
-    * [Violentmonkey](https://violentmonkey.github.io/): Chrome, Firefox, Edgeなどに対応するオープンソースのUserScriptマネージャーです。
+    * [Violentmonkey](https://violentmonkey.github.io/): Chrome, Firefox, Edgeなどに対応するオープンソースのUserScriptマネージャーです。(推奨)
     * [Greasemonkey](https://addons.mozilla.org/ja/firefox/addon/greasemonkey/): Firefox専用のUserScriptマネージャーです。
 
 2.  **スクリプトのインストール**
@@ -61,3 +59,8 @@ This is a UserScript to export all your X (formerly Twitter) bookmarks to a sing
 ## 作者 (Author)
 
 * Mekann
+
+## ライセンス (License)
+
+* 本スクリプトはMITライセンスのもとで公開されています。
+
